@@ -1,5 +1,3 @@
-from typing import Any
-
 import networkx as nx
 
 import server
@@ -16,7 +14,7 @@ def test_prepare_output_data() -> None:
         ["A", "C"]
     ]
 
-    output_data: list[dict[str, Any]] = server.prepare_output_data(G, shortest_paths)
+    output_data: server.OutputData = server.prepare_output_data(G, shortest_paths)
 
     assert output_data == [
         {

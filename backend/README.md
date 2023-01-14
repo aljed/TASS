@@ -1,4 +1,4 @@
 Start the server
 ```
-uvicorn src.server.server:app --reload
+python -m src.server.server
 ```

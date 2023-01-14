@@ -8,7 +8,7 @@ def test_calculate_weight_without_components() -> None:
     distance: int = 100
     airline_opinion_data: server.OpinionData = get_airline_opinion_data(airline_id)
     airport_opinion_data: server.OpinionData = get_airport_opinion_data(airport_id)
-    rating_weights = get_rating_weights_without_components()
+    rating_weights: server.RatingWeights = get_rating_weights_without_components()
     
     weight: float = server.calculate_weight(
         airline_id, airport_id, distance, airline_opinion_data, airport_opinion_data, rating_weights)
@@ -21,7 +21,7 @@ def test_calculate_weight_with_airline_component() -> None:
     distance: int = 100
     airline_opinion_data: server.OpinionData = get_airline_opinion_data(airline_id)
     airport_opinion_data: server.OpinionData = get_airport_opinion_data(airport_id)
-    rating_weights = get_rating_weights_with_airline_component()
+    rating_weights: server.RatingWeights = get_rating_weights_with_airline_component()
     
     weight: float = server.calculate_weight(
         airline_id, airport_id, distance, airline_opinion_data, airport_opinion_data, rating_weights)
@@ -34,7 +34,7 @@ def test_calculate_weight_with_airport_component() -> None:
     distance: int = 100
     airline_opinion_data: server.OpinionData = get_airline_opinion_data(airline_id)
     airport_opinion_data: server.OpinionData = get_airport_opinion_data(airport_id)
-    rating_weights = get_rating_weights_with_airport_component()
+    rating_weights: server.RatingWeights = get_rating_weights_with_airport_component()
     
     weight: float = server.calculate_weight(
         airline_id, airport_id, distance, airline_opinion_data, airport_opinion_data, rating_weights)
@@ -47,7 +47,7 @@ def test_calculate_weight_with_all_components() -> None:
     distance: int = 100
     airline_opinion_data: server.OpinionData = get_airline_opinion_data(airline_id)
     airport_opinion_data: server.OpinionData = get_airport_opinion_data(airport_id)
-    rating_weights = get_rating_weights_with_all_components()
+    rating_weights: server.RatingWeights = get_rating_weights_with_all_components()
     
     weight: float = server.calculate_weight(
         airline_id, airport_id, distance, airline_opinion_data, airport_opinion_data, rating_weights)

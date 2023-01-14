@@ -1,11 +1,13 @@
-from typing import Any
+from typing import Union
 
 import networkx as nx
 
-def prepare_output_data(G: nx.DiGraph, shortest_paths: list[list[str]]) -> list[dict[str, Any]]:
+OutputData = list[dict[str, Union[str, float]]]
+
+def prepare_output_data(G: nx.DiGraph, shortest_paths: list[list[str]]) -> OutputData:
     return [__get_connection_info(G, path) for path in shortest_paths]
 
-def __get_connection_info(G: nx.DiGraph, path: list[str]) -> dict[str, Any]:
+def __get_connection_info(G: nx.DiGraph, path: list[str]) -> dict[str, Union[str, float]]:
     distance: float = nx.path_weight(G, path, "weight")
     transfer_airport_ids: list[str] = path[1:-1]
     airline_ids: list[str] = []

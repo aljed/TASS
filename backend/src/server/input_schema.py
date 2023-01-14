@@ -24,3 +24,5 @@ class BestPathsInputData(BaseModel):
     destination_airport_id: str
     n_best_connections: int
     rating_weights: RatingWeights
+    class Config:
+        extra = "forbid"

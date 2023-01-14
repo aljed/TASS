@@ -1,18 +1,16 @@
-from typing import Any
-
 import networkx as nx
 import pandas as pd
 
 from .read_data import OpinionData
 from .calculate_weight import calculate_weight
-
+from .input_schema import RatingWeights
 
 def construct_graph(
         flights: pd.DataFrame,
         airline_opinion_data: OpinionData,
         airport_opinion_data: OpinionData,
-        rating_weights: dict[str, Any]) -> nx.DiGraph:
-
+        rating_weights: RatingWeights) -> nx.DiGraph:
+    
     G = nx.DiGraph()
     for row in flights.itertuples():
         weight: float = calculate_weight(

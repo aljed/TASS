@@ -1,5 +1,3 @@
-from typing import Any
-
 import pandas as pd
 import networkx as nx
 
@@ -33,11 +31,7 @@ def test_construct_graph() -> None:
             "overall_rating": 10.
         }
     }
-    rating_weights: dict[str, Any] = {
-        "distance": 1.,
-        "overall_airline": 1.,
-        "overall_airport": 1.,
-    }
+    rating_weights: server.RatingWeights = server.RatingWeights(distance=1., overall_airline=1., overall_airport=1.)
 
     G: nx.DiGraph = server.construct_graph(flights, airline_opinion_data, airport_opinion_data, rating_weights)
 
