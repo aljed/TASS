@@ -2,7 +2,7 @@ import server
 from sample_calculate_weight_data import *
 
 
-def test_calculate_weight_without_components():
+def test_calculate_weight_without_components() -> None:
     airline_id: str = "airline1"
     airport_id: str = "airport1"
     distance: int = 100
@@ -15,7 +15,7 @@ def test_calculate_weight_without_components():
     
     assert weight == 200.
 
-def test_calculate_weight_with_airline_component():
+def test_calculate_weight_with_airline_component() -> None:
     airline_id: str = "airline1"
     airport_id: str = "airport1"
     distance: int = 100
@@ -28,7 +28,7 @@ def test_calculate_weight_with_airline_component():
     
     assert weight == 450.
 
-def test_calculate_weight_with_airport_component():
+def test_calculate_weight_with_airport_component() -> None:
     airline_id: str = "airline1"
     airport_id: str = "airport1"
     distance: int = 100
@@ -41,7 +41,7 @@ def test_calculate_weight_with_airport_component():
     
     assert weight == 350.
 
-def test_calculate_weight_with_all_components():
+def test_calculate_weight_with_all_components() -> None:
     airline_id: str = "airline1"
     airport_id: str = "airport1"
     distance: int = 100

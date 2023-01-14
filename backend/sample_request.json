@@ -1,7 +1,7 @@
 {
     "departure_airport": "WAW",
     "destination_airport": "KRK",
-    "connections_number": 5,
+    "n_best_connections": 5,
     "rating_weights": {
         "distance": 0.8,
         "overall_airline": 1,

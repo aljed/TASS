@@ -5,7 +5,7 @@ import networkx as nx
 
 import server
 
-def test_construct_graph():
+def test_construct_graph() -> None:
     flights_data: list[list] = [
         ["Airport A", "Airport B", "Airline 1", 100.],
         ["Airport A", "Airport B", "Airline 2", 100.],
