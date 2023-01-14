@@ -43,7 +43,3 @@ def main() -> None:
     args = parser.parse_args()
     data_reader.set_data_path(Path(args.data_path))
     uvicorn.run(app, port=args.port)
-
-
-if __name__ == "__main__":
-    main()
