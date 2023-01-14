@@ -1,39 +1,19 @@
-{
-    "connections": [
-        {
-            "distance": 550,
-            "changes": 1,
-            "destinationAirports": [
-                {
-                    "code": "MUC",
-                    "airlines": [
-                        23,
-                        46,
-                        89
-                    ]
-                },
-                {
-                    "code": "KRK",
-                    "airlines": [
-                        45,
-                        67
-                    ]
-                }
-            ]
-        },
-        {
-            "distance": 150,
-            "changes": 0,
-            "destinationAirports": [
-                {
-                    "code": "KRK",
-                    "airlines": [
-                        23,
-                        46,
-                        89
-                    ]
-                }
-            ]
-        }
-    ]
-}
+[
+    {
+        "distance": 150.0,
+        "transfer_airport_ids": [
+            "KRK"
+        ],
+        "airline_ids": [
+            "LOT",
+            "RYANAIR"
+        ]
+    },
+    {
+        "distance": 150.0,
+        "transfer_airport_ids": [],
+        "airline_ids": [
+            "LOT"
+        ]
+    }
+]
