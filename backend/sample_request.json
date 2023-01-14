@@ -1,0 +1,22 @@
+{
+    "departure_airport": "WAW",
+    "destination_airport": "KRK",
+    "connections_number": 5,
+    "rating_weights": {
+        "distance": 0.8,
+        "overall_airline": 1,
+        "airline_components": {
+            "seat_comfort": 0.7,
+            "service_quality": 0,
+            "food_quality": 0,
+            "onboard_entertainment": 0.5,
+            "quality_price_ratio": 1
+        },
+        "overall_airport": 0.2,
+        "airport_components": {
+            "queuing_efficiency": 1,
+            "cleanliness": 1,
+            "shopping_facilities": 0
+        }
+    }
+}

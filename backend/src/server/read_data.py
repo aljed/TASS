@@ -1,10 +1,11 @@
 import pandas as pd
+from pathlib import Path
 
-DATA_PATH: str = "mock_data/"
+OpinionData = dict[str, dict[str, float]]
 
-def read_opinion_data(path_to_opinion_file: str) -> dict[str, dict[str, float]]:
+def read_opinion_data(path_to_opinion_file: str) -> OpinionData:
     df: pd.DataFrame = pd.read_csv(path_to_opinion_file)
-    all_opinion_data: dict[str, dict[str, float]] = {}
+    all_opinion_data: OpinionData = {}
     for row in df.itertuples():
         single_opinion_data: dict[str, float] = row._asdict()
         single_opinion_data.pop("Index")
@@ -14,7 +15,8 @@ def read_opinion_data(path_to_opinion_file: str) -> dict[str, dict[str, float]]:
     return all_opinion_data
 
 if __name__ == "__main__":
-    print(read_opinion_data(f"{DATA_PATH}airlines.csv"))
-    print(read_opinion_data(f"{DATA_PATH}airports.csv"))
-    flights = pd.read_csv(f"{DATA_PATH}flights.csv")
+    data_path: Path = Path("mock_data")
+    print(read_opinion_data(data_path / "airlines.csv"))
+    print(read_opinion_data(data_path / "airlines.csv"))
+    flights = pd.read_csv(data_path / "airlines.csv")
     print(flights.head())

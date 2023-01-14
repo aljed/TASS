@@ -1,4 +1,4 @@
-starting_airport_id,finishing_airport_id,airline_id,distance
+departure_airport_id,destination_airport_id,airline_id,distance
 WAW,KRK,LOT,300
 KRK,MUC,LOT,1000
 WAW,MUC,RYANAIR,1200
