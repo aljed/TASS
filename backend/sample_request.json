@@ -1,0 +1,22 @@
+{
+    "departure_airport_id": "WAW",
+    "destination_airport_id": "MUC",
+    "n_best_connections": 2,
+    "rating_weights": {
+        "distance": 1.0,
+        "overall_airline": 1.0,
+        "airline_components": {
+            "seat_comfort": 0.0,
+            "service_quality": 0.0,
+            "food_quality": 0.0,
+            "onboard_entertainment": 0.0,
+            "quality_price_ratio": 1.0
+        },
+        "overall_airport": 1.0,
+        "airport_components": {
+            "queuing_efficiency": 0.0,
+            "cleanliness": 1.0,
+            "shopping_facilities": 0.0
+        }
+    }
+}

@@ -1,0 +1,19 @@
+[
+    {
+        "distance": 2760.0,
+        "transfer_airport_ids": [],
+        "airline_ids": [
+            "RYANAIR"
+        ]
+    },
+    {
+        "distance": 3550.0,
+        "transfer_airport_ids": [
+            "KRK"
+        ],
+        "airline_ids": [
+            "RYANAIR",
+            "LOT"
+        ]
+    }
+]
