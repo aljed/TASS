@@ -15,45 +15,45 @@ export class Browser extends React.Component {
   renderSearchView() {
     return (
       <Grid container maxWidth={1200} alignItems="center" justify="center">
-        {this.state.error ? <Grid md={12} sx={{ pb: 5, pt: 5 }}>
+        {this.state.error !== '' ? <Grid item md={12} sx={{ pb: 5, pt: 5 }}>
           <Alert severity="error">
             <AlertTitle>Error</AlertTitle>
-            You must provide both departure and destination airports.
+            {this.state.error}
           </Alert>
         </Grid> : <></>}
-        <Grid md={6} sx={{ p: 1 }}>
+        <Grid item md={6} sx={{ p: 1 }}>
           <Selector handleSelect={(code) => this.setState({ departure_airport: code })} label="Departure airport" airports={this.state.airports} />
         </Grid>
-        <Grid md={6} sx={{ p: 1 }}>
+        <Grid item md={6} sx={{ p: 1 }}>
           <Selector handleSelect={(code) => this.setState({ destination_airport: code })} label="Destination airport" airports={this.state.airports} />
         </Grid>
         <RatingSlider label={'Number of connections'} value={this.state.n_best_connections} onChange={(e) => this.setState({ n_best_connections: e.target.value })} />
         <RatingSlider label={'Distance'} value={this.state.distance} onChange={(e) => this.setState({ distance: e.target.value })} />
-        <Grid xs={6}>
+        <Grid item xs={6}>
           <Typography gutterBottom sx={{ pr: 3, pl: 3, pt: 1, pb: 1 }}>
             Consider separate components for airline
           </Typography>
         </Grid>
-        <Grid xs={6} >
+        <Grid item xs={6} >
           <Checkbox color="success" checked={this.state.only_overall_airline} onChange={(e) => this.setState({ only_overall_airline: e.target.checked })} />
         </Grid>
-        <Grid xs={12} ><Paper elevation={5}  >
+        <Grid item xs={12} ><Paper elevation={5}  >
           {this.renderAirlineRaitings()}
         </Paper></Grid>
-        <Grid xs={6}>
+        <Grid item xs={6}>
           <Typography gutterBottom sx={{ pr: 3, pl: 3, pt: 1, pb: 1 }}>
             Consider separate components for airport
           </Typography>
         </Grid>
-        <Grid xs={6} >
+        <Grid item xs={6} >
           <Checkbox color="success" checked={this.state.only_overall_airport} onChange={(e) => this.setState({ only_overall_airport: e.target.checked })} />
         </Grid>
-        <Grid xs={12}>
+        <Grid item xs={12}>
           <Paper elevation={5} >
             {this.renderAirportRaitings()}
           </Paper>
         </Grid>
-        <Grid xs={12} sx={{ pt: 3 }}>
+        <Grid item xs={12} sx={{ pt: 3 }}>
           <Box textAlign='right'>
             <Button variant="contained" onClick={() => this.getConnections(this.state)} color="success" >Search</Button>
           </Box>
@@ -110,7 +110,7 @@ export class Browser extends React.Component {
   }
 
   getConnections(state) {
-    if (state.destination_airport != null && state.departure_airport != null &&state.destination_airport !== state.departure_airport) {
+    if (state.destination_airport != null && state.departure_airport != null && state.destination_airport !== state.departure_airport) {
       const requestOptions = {
         method: 'POST',
         headers: {
@@ -121,9 +121,14 @@ export class Browser extends React.Component {
 
       fetch(configData.connectionsEndpoint, requestOptions)
         .then(response => response.json())
-        .then(data => this.setState({ response: data, searchMode: false, error: false }));
+        .then(data => {
+          if (data.length !== 0)
+            this.setState({ response: data, searchMode: false })
+          else
+            this.setState({ error: 'No connections were found.' })
+        });
     } else {
-      this.setState({ error: true })
+      this.setState({ error: 'You must provide both departure and destination airports.' })
     }
   }
 
@@ -138,7 +143,6 @@ export class Browser extends React.Component {
       .then(response => response.json())
       .then(airports =>
         this.setState({ airports: airports.map(a => ({ key: a.id, label: a.name })) }))
-        // this.setState({ airports: airports.map(a => ({ key: a.id, label: (a.id + " (" + a.name + ")") })) }))
 
   }
 }
@@ -163,7 +167,7 @@ function initialState(airports = []) {
     only_overall_airline: false,
     response: null,
     searchMode: true,
-    error: false,
+    error: '',
     include_ratings_in_output: true,
     airports: airports
   }

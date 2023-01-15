@@ -1,8 +1,8 @@
 export default function buildRequest(state) {
 
     var request = {
-        departure_airport: state.departure_airport,
-        destination_airport: state.destination_airport,
+        departure_airport_id: state.departure_airport,
+        destination_airport_id: state.destination_airport,
         n_best_connections: state.n_best_connections,
         rating_weights: {
             distance: state.distance / 10

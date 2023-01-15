@@ -19,12 +19,12 @@ export class RatingSlider extends React.Component {
   render() {
     return (
       <Grid container alignItems="center" justify="center">
-        <Grid xs={6} sx={{ pr: 3, pl: 3, pt: 1, pb: 1 }}>
+        <Grid item xs={6} sx={{ pr: 3, pl: 3, pt: 1, pb: 1 }}>
           <Typography id="input-slider" gutterBottom>
             {this.props.label}
           </Typography>
         </Grid>
-        <Grid xs={6} sx={{ pr: 3, pl: 3, pt: 1, pb: 1 }}>
+        <Grid item xs={6} sx={{ pr: 3, pl: 3, pt: 1, pb: 1 }}>
           <Slider
             color="success"
             value={this.props.value}

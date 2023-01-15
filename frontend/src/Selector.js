@@ -27,7 +27,7 @@ const containsText = (text, searchText) =>
   text.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
 
 export default function Selector(props) {
-  const [airport, setAirport] = useState(undefined);
+  const [airport, setAirport] = useState("");
 
   const [filter, setFilter] = useState("");
 
@@ -43,7 +43,6 @@ export default function Selector(props) {
       <FormControl fullWidth color="success" >
         <InputLabel color="success" id="search-select-label">{props.label}</InputLabel>
         <Select
-          // MenuProps={{  }}
           labelId="search-select-label"
           id="search-select"
           label={props.label}
@@ -57,7 +56,7 @@ export default function Selector(props) {
           color="success"
           MenuProps={MenuProps}
         >
-          <ListSubheader color="success">
+          <ListSubheader>
             <TextField
               size="small"
               autoFocus
