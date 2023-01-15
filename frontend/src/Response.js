@@ -50,7 +50,7 @@ export default function Response(props) {
           </Grid>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>{airportsList(connection.transfer_airports, props.departure_airport, props.destination_airport, connection.airlines)}</Typography>
+          {airportsList(connection.transfer_airports, props.departure_airport, props.destination_airport, connection.airlines)}
         </AccordionDetails>
       </Accordion>
       )

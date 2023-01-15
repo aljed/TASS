@@ -35,7 +35,7 @@ export default function Selector(props) {
 
   const filteredAirports = useMemo(
     () => airports.filter((airport) => containsText(airport.key, filter) || containsText(airport.label, filter)),
-    [filter]
+    [filter, airports]
   );
 
   return (
@@ -48,13 +48,13 @@ export default function Selector(props) {
           label={props.label}
           onChange={(e) => {
             let airport = filteredAirports.find(a => a.label === e.target.value)
-            setAirport(airport)
+            setAirport(airport.label)
             props.handleSelect(airport.key)
           }}
           onClose={() => setFilter("")}
-          renderValue={() => airport.label}
           color="success"
           MenuProps={MenuProps}
+          value={airport}
         >
           <ListSubheader>
             <TextField
