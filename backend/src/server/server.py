@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pandas as pd
 from fastapi import FastAPI, Response, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import networkx as nx
 
@@ -35,7 +36,7 @@ async def get_best_paths(
 
     departure_airport_id: str = best_paths_input_data.departure_airport_id
     destination_airport_id: str = best_paths_input_data.destination_airport_id
-    
+
     if departure_airport_id not in airport_id_to_name_map:
         raise HTTPException(
             status_code=404,
@@ -53,7 +54,7 @@ async def get_best_paths(
         departure_airport_id,
         destination_airport_id,
         best_paths_input_data.n_best_connections)
-        
+
     return prepare_output_data(
         G,
         shortest_paths,
@@ -79,7 +80,16 @@ async def get_all_airports(static_data: StaticData = Depends(data_reader)) -> Re
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--data_path", type=str, default="mock_data", help="Path to directory with data files")
-    parser.add_argument("--port", type=int, default=3000, help="Port the server should listen on")
+    parser.add_argument("--port", type=int, default=3000, help="Port the backend server should listen on")
+    parser.add_argument("--frontend_port", type=int, default=3002, help="Port the frontend server is listening on")
     args = parser.parse_args()
     data_reader.set_data_path(Path(args.data_path))
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=[f"http://localhost:{args.frontend_port}"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
     uvicorn.run(app, port=args.port)
