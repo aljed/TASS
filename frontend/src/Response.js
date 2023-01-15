@@ -6,10 +6,15 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import Grid from '@mui/material/Grid';
-import { Button } from '@mui/material';
-
+import { Button, Box } from '@mui/material';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import MyPopover from './MyPopover';
 
 export default function Response(props) {
+
+  function getLabelByKey(key) {
+    return props.airports.find(airport => airport.key === key).label
+  }
 
   function airportsHeader(airports, dep, dest) {
     var copied = []
@@ -17,65 +22,92 @@ export default function Response(props) {
       copied = airports.slice()
     copied.unshift(dep)
     copied.push(dest)
-    return copied.map( (airport) => {
+    return copied.map((airport) => {
       if (airport !== copied.at(-1))
-        return <span>{airport} <DoubleArrowIcon color="blue" /></span>
-      else 
-        return <span>{airport}</span>
+        return (<><Grid item>{getLabelByKey(airport)}</Grid><Grid item><KeyboardArrowRightIcon color="success" /> </Grid></>)
+      else
+        return <Grid>{getLabelByKey(airport)}</Grid>
     })
   }
 
-  function airportsList(airports, dep, dest, airline_ids) {
-    console.log(airline_ids)
-    var copied = []
-    if (airports !== undefined)
-      copied = airports.slice()
-    copied.unshift(dep)
-    copied.push(dest)
-    return copied.map( (airport, i) => {
-      if (airport !== copied.at(-1))
-        return <p>{airport} <DoubleArrowIcon color="blue" /> {copied.at(i+1)} {airline_ids.at(i)}</p>
-      else return <span />
-    })
-  }
-  
   function showConnections() {
-    return props.connections.map( connection => {
+    return props.connections.map(connection => {
       return (<Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>{airportsHeader(connection.transfer_airport_ids, props.departure_airport, props.destination_airport)}</Typography>
+          <Grid container md={12} >
+            <Grid container md={10}>
+              {airportsHeader(connection.transfer_airports.map(a => a.id), props.departure_airport, props.destination_airport)}
+            </Grid>
+            <Grid md={2}>
+              <Box textAlign='right'>
+                <Typography sx={{ pr: 3 }}>{connection.distance} km</Typography>
+              </Box>
+            </Grid>
+          </Grid>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>{airportsList(connection.transfer_airport_ids, props.departure_airport, props.destination_airport, connection.airline_ids)}</Typography>
+          <Typography>{airportsList(connection.transfer_airports, props.departure_airport, props.destination_airport, connection.airlines)}</Typography>
         </AccordionDetails>
       </Accordion>
       )
     })
   }
 
+  function airportsList(airports, dep, dest, airlines) {
+    var copied = []
+    if (airports !== undefined)
+      copied = airports.slice()
+    copied.unshift(dep)
+    copied.push(dest)
+    return copied.map((airport, i) => {
+      if (airport !== copied.at(-1))
+        return (
+          <Grid container md={12}>
+            <Grid md={3}>
+              {airport === dep ? <Typography>{getLabelByKey(dep)}</Typography> : <MyPopover entity={airport} isAirport={true} />}
+            </Grid>
+            <Grid md={1}>
+              <DoubleArrowIcon color="success" />
+            </Grid>
+            <Grid md={3}>
+              {copied.at(i + 1) === dest ? <Typography>{getLabelByKey(dest)}</Typography> : <MyPopover entity={copied.at(i + 1)} isAirport={true} />}
+            </Grid>
+            <Grid md={3}></Grid>
+            <Grid md={2}>
+              <MyPopover entity={airlines.at(i)} isAirport={false} />
+            </Grid>
+          </Grid>)
+      else return <span />
+    })
+  }
+
   return (
-    <div>
-      <Grid container spacing={0}>
-        <Grid xs={5}>
-          <Typography variant="h4" gutterBottom>
-            {props.departure_airport}
+    <Box>
+      <Grid container maxWidth={1200} sx={{ p: 2 }} alignItems="center" justify="center" >
+        <Grid >
+          <Typography variant="h4"  >
+            {getLabelByKey(props.departure_airport)}
           </Typography>
         </Grid>
-        <Grid xs={2}>
-          <DoubleArrowIcon color="blue" />
+        <Grid sx={{ pr: 3, pl: 3 }}>
+          <DoubleArrowIcon color="success" />
         </Grid>
-        <Grid xs={5}>
-          <Typography variant="h4" gutterBottom>
-            {props.destination_airport}
+        <Grid >
+          <Typography variant="h4" >
+            {getLabelByKey(props.destination_airport)}
           </Typography>
         </Grid>
       </Grid>
       {showConnections()}
-      <Button variant="contained" onClick={props.returnFun}>Return to browser</Button>
-    </div>
+      <Grid md={12} sx={{ pt: 3 }}>
+        <Box textAlign='right'>
+          <Button variant="contained" onClick={props.returnFun} color="success">Return to browser</Button>
+        </Box>
+      </Grid>
+    </Box>
   );
 }

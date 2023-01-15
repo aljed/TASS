@@ -10,18 +10,28 @@ import {
   InputAdornment
 } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
-import DataUtils from './DataUtils';
 
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      autoFocus: false
+    },
+  },
+};
 
 const containsText = (text, searchText) =>
   text.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
 
-const airports = DataUtils.allAirports();
-
 export default function Selector(props) {
-  const [airport, setAirport] = useState(airports[0]);
+  const [airport, setAirport] = useState(undefined);
 
   const [filter, setFilter] = useState("");
+
+  const airports = props.airports
 
   const filteredAirports = useMemo(
     () => airports.filter((airport) => containsText(airport.key, filter) || containsText(airport.label, filter)),
@@ -30,28 +40,30 @@ export default function Selector(props) {
 
   return (
     <Box>
-      <FormControl fullWidth>
-        <InputLabel id="search-select-label">Airport</InputLabel>
+      <FormControl fullWidth color="success" >
+        <InputLabel color="success" id="search-select-label">{props.label}</InputLabel>
         <Select
-          MenuProps={{ autoFocus: false }}
+          // MenuProps={{  }}
           labelId="search-select-label"
           id="search-select"
-          value={airport.label}
-          label="Options"
+          label={props.label}
           onChange={(e) => {
-            let airport = filteredAirports.find( a => a.label === e.target.value )
+            let airport = filteredAirports.find(a => a.label === e.target.value)
             setAirport(airport)
             props.handleSelect(airport.key)
           }}
           onClose={() => setFilter("")}
           renderValue={() => airport.label}
+          color="success"
+          MenuProps={MenuProps}
         >
-          <ListSubheader>
+          <ListSubheader color="success">
             <TextField
               size="small"
               autoFocus
               placeholder="Type to search..."
               fullWidth
+              color="success"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -68,7 +80,7 @@ export default function Selector(props) {
             />
           </ListSubheader>
           {filteredAirports.map((airport, i) => (
-            <MenuItem key={airport.key} value={airport.label}>
+            <MenuItem key={airport.key} value={airport.label} color="success" >
               {airport.label}
             </MenuItem>
           ))}
