@@ -42,7 +42,7 @@ export default function Response(props) {
             <Grid container md={10}>
               {airportsHeader(connection.transfer_airports.map(a => a.id), props.departure_airport, props.destination_airport)}
             </Grid>
-            <Grid md={2}>
+            <Grid item md={2}>
               <Box textAlign='right'>
                 <Typography sx={{ pr: 3 }}>{connection.distance} km</Typography>
               </Box>
@@ -67,17 +67,17 @@ export default function Response(props) {
       if (airport !== copied.at(-1))
         return (
           <Grid container md={12}>
-            <Grid md={3}>
+            <Grid item md={3}>
               {airport === dep ? <Typography>{getLabelByKey(dep)}</Typography> : <MyPopover entity={airport} isAirport={true} />}
             </Grid>
-            <Grid md={1}>
+            <Grid item md={1}>
               <DoubleArrowIcon color="success" />
             </Grid>
-            <Grid md={3}>
+            <Grid item md={3}>
               {copied.at(i + 1) === dest ? <Typography>{getLabelByKey(dest)}</Typography> : <MyPopover entity={copied.at(i + 1)} isAirport={true} />}
             </Grid>
-            <Grid md={3}></Grid>
-            <Grid md={2}>
+            <Grid item md={3}></Grid>
+            <Grid item md={2}>
               <MyPopover entity={airlines.at(i)} isAirport={false} />
             </Grid>
           </Grid>)
@@ -88,22 +88,22 @@ export default function Response(props) {
   return (
     <Box>
       <Grid container maxWidth={1200} sx={{ p: 2 }} alignItems="center" justify="center" >
-        <Grid >
+        <Grid item >
           <Typography variant="h4"  >
             {getLabelByKey(props.departure_airport)}
           </Typography>
         </Grid>
-        <Grid sx={{ pr: 3, pl: 3 }}>
+        <Grid item sx={{ pr: 3, pl: 3 }}>
           <DoubleArrowIcon color="success" />
         </Grid>
-        <Grid >
+        <Grid item >
           <Typography variant="h4" >
             {getLabelByKey(props.destination_airport)}
           </Typography>
         </Grid>
       </Grid>
       {showConnections()}
-      <Grid md={12} sx={{ pt: 3 }}>
+      <Grid item md={12} sx={{ pt: 3 }}>
         <Box textAlign='right'>
           <Button variant="contained" onClick={props.returnFun} color="success">Return to browser</Button>
         </Box>
