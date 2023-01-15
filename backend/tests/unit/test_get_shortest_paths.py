@@ -14,3 +14,12 @@ def test_get_shortest_paths() -> None:
     assert len(shortest_paths) == 2
     assert shortest_paths[0] == ["A", "B", "C"]
     assert shortest_paths[1] == ["A", "C"]
+
+def test_get_shortest_paths_between_unconnected_nodes() -> None:
+    G: nx.DiGraph = nx.DiGraph()
+    G.add_nodes_from(["A", "B"])
+    G.add_edge("A", "B", weight=100.)
+    
+    shortest_paths: list[list[str]] = server.get_shortest_paths(G, "B", "A", 1)
+
+    assert shortest_paths == []
