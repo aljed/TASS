@@ -1,0 +1,4 @@
+{
+    "airportsEndpoint": "http://localhost:3001/airports",
+    "connectionsEndpoint": "http://localhost:3001/search"
+}
