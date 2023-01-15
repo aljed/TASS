@@ -52,5 +52,5 @@ To see all available parameters for server startup customization run
 python -m server -h
 ```
 
-[Here](sample_request.json) is a sample request to the server's main endpoint and
-[here](sample_response.json) is the corresponding response.
+[Here](sample_requests_and_responses) are sample requests and responses for all of the endpoints.
+Each subdirectory includes a response (and optionally a request) for a specific endpoint.
