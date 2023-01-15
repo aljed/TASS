@@ -44,7 +44,7 @@ export default function Response(props) {
             </Grid>
             <Grid item md={2}>
               <Box textAlign='right'>
-                <Typography sx={{ pr: 3 }}>{connection.distance} km</Typography>
+                <Typography sx={{ pr: 3 }}>{connection.distance.toFixed(1)} km</Typography>
               </Box>
             </Grid>
           </Grid>

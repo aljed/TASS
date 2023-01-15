@@ -5,14 +5,14 @@ export default function buildRequest(state) {
         destination_airport_id: state.destination_airport,
         n_best_connections: state.n_best_connections,
         rating_weights: {
-            distance: state.distance / 10
+            distance: state.distance / 10,
+            overall_airport: state.overall_airport / 10,
+            overall_airline: state.overall_airline / 10
         },
         include_ratings_in_output: true
     }
 
-    if (!state.only_overall_airport) {
-        request['rating_weights']['overall_airport'] = state.overall_airport / 10
-    } else {
+    if (state.only_overall_airport) {
         request['rating_weights']['airport_components'] = {
             queuing_efficiency: state.queuing_efficiency / 10,
             cleanliness: state.cleanliness / 10,
@@ -20,9 +20,7 @@ export default function buildRequest(state) {
         }
     }
 
-    if (!state.only_overall_airline) {
-        request['rating_weights']['overall_airline'] = state.overall_airline / 10
-    } else {
+    if (state.only_overall_airline) {
         request['rating_weights']['airline_components'] = {
             seat_comfort: state.seat_comfort / 10,
             service_quality: state.service_quality / 10,
