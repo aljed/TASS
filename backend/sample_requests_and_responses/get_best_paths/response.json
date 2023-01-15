@@ -1,0 +1,61 @@
+[
+    {
+        "distance": 2760.0,
+        "transfer_airports": [],
+        "airlines": [
+            {
+                "id": "RYANAIR",
+                "name": "Ryanair",
+                "ratings": {
+                    "overall_rating": 5.0,
+                    "seat_comfort": 2.2,
+                    "service_quality": 3.0,
+                    "food_quality": 6.0,
+                    "onboard_entertainment": 4.0,
+                    "quality_price_ratio": 5.0
+                }
+            }
+        ]
+    },
+    {
+        "distance": 3550.0,
+        "transfer_airports": [
+            {
+                "id": "KRK",
+                "name": "Cracow",
+                "ratings": {
+                    "overall_rating": 4.0,
+                    "queuing_efficiency": 6.0,
+                    "cleanliness": 1.0,
+                    "shopping_facilities": 4.5
+                }
+            }
+        ],
+        "airlines": [
+            {
+                "id": "RYANAIR",
+                "name": "Ryanair",
+                "ratings": {
+                    "overall_rating": 5.0,
+                    "seat_comfort": 2.2,
+                    "service_quality": 3.0,
+                    "food_quality": 6.0,
+                    "onboard_entertainment": 4.0,
+                    "quality_price_ratio": 5.0
+                }
+            },
+            {
+                "id": "LOT",
+                "name": "Lot",
+                "ratings": {
+                    "overall_rating": 3.0,
+                    "seat_comfort": 4.4,
+                    "service_quality": 5.3,
+                    "food_quality": 2.0,
+                    "onboard_entertainment": 6.0,
+                    "quality_price_ratio": 5.0
+                }
+            }
+        ]
+    }
+]

@@ -23,6 +23,7 @@ class BestPathsInputData(BaseModel):
     departure_airport_id: str
     destination_airport_id: str
     n_best_connections: int
+    include_ratings_in_output: bool = False
     rating_weights: RatingWeights
     class Config:
         extra = "forbid"
