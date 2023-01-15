@@ -1,4 +1,4 @@
-from .read_data import OpinionData
+from .data_reader import OpinionData
 from .input_schema import RatingWeights
 
 MAX_RATING: int = 10

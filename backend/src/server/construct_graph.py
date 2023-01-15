@@ -1,7 +1,7 @@
 import networkx as nx
 import pandas as pd
 
-from .read_data import OpinionData
+from .data_reader import OpinionData
 from .calculate_weight import calculate_weight
 from .input_schema import RatingWeights
 

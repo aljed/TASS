@@ -1,5 +1,5 @@
 from .input_schema import RatingWeights, AirlineRatingWeightsComponents, AirportRatingWeightsComponents
-from .read_data import OpinionData
+from .data_reader import OpinionData
 from .calculate_weight import calculate_weight
 from .construct_graph import construct_graph
 from .get_shortest_paths import get_shortest_paths

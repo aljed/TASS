@@ -2,6 +2,7 @@
     "departure_airport_id": "WAW",
     "destination_airport_id": "MUC",
     "n_best_connections": 2,
+    "include_ratings_in_output": true,
     "rating_weights": {
         "distance": 1.0,
         "overall_airline": 1.0,
