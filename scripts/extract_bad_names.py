@@ -14,9 +14,9 @@ import pandas as pd
 
 AIRPORT_CODES_PATH  = "../data/airport-codes_csv.csv"
 AIRPORT_TYPES       = ["medium_airport", "large_airport"]
-BAD_DF_PATH         = "../data/bad_df.csv"
+BAD_DF_PATH         = "../data/bad_names_df.csv"
 COLUMNS             = ["ident", "type", "name", "iata_code", "coordinates"]  # coordinates: lon, lat
-GOOD_DF_PATH        = "../data/good_df.csv"
+GOOD_DF_PATH        = "../data/good_names_df.csv"
 
 VERBOSE = True
 
@@ -48,10 +48,9 @@ def rm_missing(df: pd.DataFrame) -> pd.DataFrame:
     nn = len(df)
     for col in COLUMNS[2:]:
         df.drop_duplicates(subset=[col], inplace=True)
-        # df.drop_duplicates(subset=[col], inplace=True, ignore_index=True)
     if VERBOSE:
         print(f"Dropped {nn - len(df)} rows.")
-        
+
     return df
 
 
@@ -96,7 +95,7 @@ def extract_bad_names(df: pd.DataFrame) -> pd.DataFrame:
     if VERBOSE:
         print(f"... {len(good_df)} good names, {len(bad_df)} messed-up names")
         print("... saved files: " + GOOD_DF_PATH + ", " + BAD_DF_PATH)
-    
+
     return bad_df
 
 
