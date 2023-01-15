@@ -44,13 +44,13 @@ export default function Response(props) {
             </Grid>
             <Grid item md={2}>
               <Box textAlign='right'>
-                <Typography sx={{ pr: 3 }}>{connection.distance} km</Typography>
+                <Typography sx={{ pr: 3 }}>Score: {Math.round(connection.distance)}</Typography>
               </Box>
             </Grid>
           </Grid>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>{airportsList(connection.transfer_airports, props.departure_airport, props.destination_airport, connection.airlines)}</Typography>
+          {airportsList(connection.transfer_airports, props.departure_airport, props.destination_airport, connection.airlines)}
         </AccordionDetails>
       </Accordion>
       )

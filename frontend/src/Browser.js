@@ -67,6 +67,7 @@ export class Browser extends React.Component {
       return <RatingSlider label={"Overall airline rating"} value={this.state.overall_airline} onChange={(e) => this.setState({ overall_airline: e.target.value })} />
     else return (
       <Box>
+        <RatingSlider label={"Overall airline rating"} value={this.state.overall_airline} onChange={(e) => this.setState({ overall_airline: e.target.value })} />
         <RatingSlider label={"Seat comfort"} value={this.state.seat_comfort} onChange={(e) => this.setState({ seat_comfort: e.target.value })} />
         <RatingSlider label={"Service quality"} value={this.state.service_quality} onChange={(e) => this.setState({ service_quality: e.target.value })} />
         <RatingSlider label={"Food quality"} value={this.state.food_quality} onChange={(e) => this.setState({ food_quality: e.target.value })} />
@@ -81,6 +82,7 @@ export class Browser extends React.Component {
       return <RatingSlider label={"Overall airport rating"} value={this.state.overall_airport} onChange={(e) => this.setState({ overall_airport: e.target.value })} />
     else return (
       <Box>
+        <RatingSlider label={"Overall airport rating"} value={this.state.overall_airport} onChange={(e) => this.setState({ overall_airport: e.target.value })} />
         <RatingSlider label={"Queuing Efficiency"} value={this.state.queuing_efficiency} onChange={(e) => this.setState({ queuing_efficiency: e.target.value })} />
         <RatingSlider label={"Cleanliness"} value={this.state.cleanliness} onChange={(e) => this.setState({ cleanliness: e.target.value })} />
         <RatingSlider label={"Shopping Facilities"} value={this.state.shopping_facilities} onChange={(e) => this.setState({ shopping_facilities: e.target.value })} />
