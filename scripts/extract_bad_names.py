@@ -15,21 +15,22 @@ import pandas as pd
 AIRPORT_CODES_PATH  = "../data/airport-codes_csv.csv"
 AIRPORT_TYPES       = ["medium_airport", "large_airport"]
 BAD_DF_PATH         = "../data/bad_names_df.csv"
-COLUMNS             = ["ident", "type", "name", "iata_code", "coordinates"]  # coordinates: lon, lat
+COLUMNS             = ["ident", "type", "name", "iso_country", "iata_code", "coordinates"]  # coordinates: lon, lat
+DROP_DUPLICATE_COLS = ["name", "iata_code", "coordinates"]
 GOOD_DF_PATH        = "../data/good_names_df.csv"
 
-VERBOSE = True
+DO_LOG = True
 
 
 def read_airports(path: str) -> pd.DataFrame:
-    if VERBOSE:
+    if DO_LOG:
         print("Reading airport data from: " + path)
     df = pd.read_csv(path)
-    if VERBOSE:
+    if DO_LOG:
         print("Selecting medium and large airports from Europe...")
     df = df[df["continent"] == "EU"]
     df = df[df["type"].isin(AIRPORT_TYPES)]
-    if VERBOSE:
+    if DO_LOG:
         print(f"Selecting columns: {COLUMNS}.")
     df = df[COLUMNS]
 
@@ -39,16 +40,16 @@ def read_airports(path: str) -> pd.DataFrame:
 # remove missing or repeating data
 def rm_missing(df: pd.DataFrame) -> pd.DataFrame:
     n = len(df)
-    if VERBOSE:
+    if DO_LOG:
         print(f"Total rows: {len(df)}")
         print("Dropping missing and repeating values:")
     df.dropna(inplace=True)  # some iata codes repeat but not in EU
-    if VERBOSE:
+    if DO_LOG:
         print(f"Dropped {n - len(df)} rows.")
     nn = len(df)
-    for col in COLUMNS[2:]:
+    for col in DROP_DUPLICATE_COLS:
         df.drop_duplicates(subset=[col], inplace=True)
-    if VERBOSE:
+    if DO_LOG:
         print(f"Dropped {nn - len(df)} rows.")
 
     return df
@@ -84,15 +85,15 @@ def is_not_alphanum(df: pd.DataFrame, col: str) -> list:
 
 
 def extract_bad_names(df: pd.DataFrame) -> pd.DataFrame:
-    if VERBOSE:
+    if DO_LOG:
         print("Extracting airports with messed-up UTF-8 names:")
     good_names_idx = is_alphanum(df, "name")
     bad_names_idx = is_not_alphanum(df, "name")
     good_df = df.loc[good_names_idx]
     good_df.to_csv(GOOD_DF_PATH, index=None)
-    bad_df =  df.loc[bad_names_idx]
+    bad_df = df.loc[bad_names_idx]
     bad_df.to_csv(BAD_DF_PATH, index=None)
-    if VERBOSE:
+    if DO_LOG:
         print(f"... {len(good_df)} good names, {len(bad_df)} messed-up names")
         print("... saved files: " + GOOD_DF_PATH + ", " + BAD_DF_PATH)
 
@@ -102,8 +103,9 @@ def extract_bad_names(df: pd.DataFrame) -> pd.DataFrame:
 def main():
     df = read_airports(AIRPORT_CODES_PATH)    
     rm_missing(df)
-    print(df)
-    print(df.shape)
+    if DO_LOG:
+        print(df)
+        print(df.shape)
     extract_bad_names(df)
     #
     # Now go and correct the messed-up names in the CSV by hand.
@@ -112,5 +114,5 @@ def main():
 
 if __name__ == "__main__":
     main()
-    if VERBOSE:
+    if DO_LOG:
         print("###   Now go and correct the messed-up names in the CSV by hand.   ###")
