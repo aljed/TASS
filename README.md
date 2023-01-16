@@ -1,5 +1,13 @@
 # TASS
 
+## Kolejność postępowania
+
+1. `scripts/extract_bad_names.py`
+2. Ręczne poprawki nazw lkotnisk, lub skopiopwać z `corrected_df.csv`
+3. `scripts/merge_good_bad.py`
+4. `scripts/make_flights.py`
+5. `scripts/prep_airlines.py`
+
 ## Przygotowanie danych
 
 ### `scripts/extract_bad_names.py`
