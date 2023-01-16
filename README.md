@@ -21,10 +21,16 @@
 ### Ręczne poprawki
 
 Poprawki wykonuje się po wykonaniu skryptu `extract_bad_names.py`, a przed wykonaniem `merge_good_bad.py`.
-W tej wersji jest 157 wpisów z nazwami lotnisk zawierającymi nieprawidłowe znaki. Poprawia się je ręcznie otwierając CSV w Excelu i wyszukując po kodach IATA prawidłowe nazwy lotnisk w Internecie.
+W tej wersji jest 157 wpisów z nazwami lotnisk zawierającymi nieprawidłowe znaki.
+Poprawia się je ręcznie otwierając CSV w Excelu i wyszukując po kodach IATA prawidłowe nazwy lotnisk w Internecie.
+**Konieczne** jest zapisanie poprawionego pliku jako `corrected_df.csv`.
+Skrypt łączący `merge_good_bad.py` **usuwa** pliki z nieprawidłowymi i dobrymi nazwami lotnisk, a poprawiony ręcznie pozostawia nietkniętym.
+
 Plik `data/corrected.csv` zawiera poprawione nazwy.
 
 ### `scripts/make_flights.py`
 
 Tworzy tabelę lotów w Europie z danych w `routes.dat` i `eu_airports_df.csv`. Oblicza dystans w kilometrach.
 **TO DO:** poprawić airline_id na wygodną dla człowieka.
+Kolumny:
+

@@ -1,14 +1,14 @@
 #! /usr/bin/env python3
 
-##############################################
-##  Mikołaj Pańka                           ##
-##  TASS projekt 2                          ##
-##                                          ##
-##  Styczeń 2023                            ##
-##############################################
+##########################################################
+##  Aleksander Jedynak, Piotr Satała, Mikołaj Pańka     ##
+##  TASS projekt 2                                      ##
+##                                                      ##
+##  Styczeń 2023                                        ##
+##########################################################
 
 #
-# Create flights.csv with columns:
+# Create eu_flights.csv with columns:
 # departure_airport_id | destination_airport_id | airline_id | distance
 # 
 
@@ -17,10 +17,10 @@ from math import acos, sin, cos, radians, floor
 import pandas as pd
 
 
-# EU_ROUTES_PATH      = "../data/eu_routes.csv"
-FLIGHTS_CSV_PATH    = "../data/flights.csv"
+FLIGHTS_CSV_PATH    = "../data/eu_flights.csv"
 ROUTES_PATH         = "../data/routes.dat"
 ROUTES_COLUMNS      = ["airline", "source_airport", "destination_airport", "stops"]
+NEW_COLUMNS         = ["departure_airport_id", "destination_airport_id", "airline_id", "distance"]
 EU_AIRPORTS_PATH    = "../data/eu_airports_df.csv"
 
 DO_LOG = True
@@ -108,7 +108,7 @@ def main():
         print(f"Rearranging columns.")
     eu_routes = swap_columns(eu_routes, "airline", "destination_airport")
     eu_routes = swap_columns(eu_routes, "destination_airport", "source_airport")
-    eu_routes.columns = ["departure_airport_id", "destination_airport_id", "airline_id", "distance"]
+    eu_routes.columns = NEW_COLUMNS
     if DO_LOG:
         print(eu_routes)
         print("Calculating flight distances.")
