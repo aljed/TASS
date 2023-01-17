@@ -79,7 +79,7 @@ async def get_all_airports(static_data: StaticData = Depends(data_reader)) -> Re
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_path", type=str, default="mock_data", help="Path to directory with data files")
+    parser.add_argument("--data_path", type=str, default="../final_data/", help="Path to directory with data files")
     parser.add_argument("--port", type=int, default=3000, help="Port the backend server should listen on")
     parser.add_argument("--frontend_port", type=int, default=3002, help="Port the frontend server is listening on")
     args = parser.parse_args()
