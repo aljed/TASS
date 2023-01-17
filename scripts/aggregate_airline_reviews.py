@@ -1,10 +1,14 @@
+#! /usr/bin/env python3
+
 from pathlib import Path
 
 import pandas as pd
 pd.options.mode.chained_assignment = None  # default='warn'
 
-AIRLINE_REVIEWS_RAW_DATA_PATH: Path = Path("data/airline_reviews.csv")
-AGGREGATED_AIRLINE_REVIEWS_SAVE_PATH: Path = Path("data/aggregated_airline_reviews.csv")
+AIRLINE_REVIEWS_RAW_DATA_PATH: Path = Path("../data/airline_reviews.csv")
+AGGREGATED_AIRLINE_REVIEWS_SAVE_PATH: Path = Path("../data/aggregated_airline_reviews.csv")
+# AIRLINE_REVIEWS_RAW_DATA_PATH: Path = Path("data/airline_reviews.csv")
+# AGGREGATED_AIRLINE_REVIEWS_SAVE_PATH: Path = Path("data/aggregated_airline_reviews.csv")
 
 if __name__ == "__main__":
     airline_reviews_raw: pd.DataFrame = pd.read_csv(
@@ -25,7 +29,8 @@ if __name__ == "__main__":
     airline_reviews_final: pd.DataFrame = aggregated_airline_reviews[
         ~aggregated_airline_reviews["overall_rating"].isna()]
     
-    columns_to_fill_empty_values_in: list[str] = [
+    columns_to_fill_empty_values_in = [
+    # columns_to_fill_empty_values_in: list[str] = [
         "seat_comfort", "service_quality", "food_quality", "onboard_entertainment", "quality_price_ratio"]
     for column in columns_to_fill_empty_values_in:
         airline_reviews_final[column] = airline_reviews_final[column].fillna(
