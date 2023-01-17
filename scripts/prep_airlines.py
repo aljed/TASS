@@ -38,7 +38,7 @@ def make_airlines_iata(eu_countries_list):
     return airlines_df
 
 
-def make_airports_iso():
+def make_countries_iso():
     eu_countries = pd.read_csv(CONTINENT_COUNTRY_PATH, sep=" \t", engine="python")
     eu_countries = eu_countries[eu_countries["Continent"] == "Europe"]
     eu_countries_list = eu_countries["Country"].to_list()
@@ -76,11 +76,11 @@ def airline_ids_to_names(airline_iata: pd.DataFrame):
 def main():
     if DO_LOG:
         print("Associating EU countries with their ISO codes.")
-    eu_countries_list, eu_ap_iso = make_airports_iso()
+    eu_countries_list, eu_countries_iso = make_countries_iso()
     if DO_LOG:
-        print(eu_ap_iso)
+        print(eu_countries_iso)
         print("Saving EU country ISO codes to " + EU_COUNTRY_ISO_CODES)
-    eu_ap_iso.to_csv(EU_COUNTRY_ISO_CODES, index=None)
+    eu_countries_iso.to_csv(EU_COUNTRY_ISO_CODES, index=None)
     if DO_LOG:
         print("Associating airlines with their IATA codes.")
     airlines_iata_df = make_airlines_iata(eu_countries_list)
