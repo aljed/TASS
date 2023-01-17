@@ -30,7 +30,8 @@ DO_LOG = True
 def load_routes(path: str) -> pd.DataFrame:
     if DO_LOG:
         print("Reading global route data from: " + path)
-    df = pd.read_csv(ROUTES_PATH, names=GLOBAL_ROUTES_COLUMNS)[ROUTES_COLUMNS]
+    df = pd.read_csv(ROUTES_PATH)[ROUTES_COLUMNS]
+    # df = pd.read_csv(ROUTES_PATH, names=GLOBAL_ROUTES_COLUMNS)[ROUTES_COLUMNS]
     n = len(df)
     if DO_LOG:
         print(df)
@@ -103,6 +104,7 @@ def main():
     n = len(eu_routes)
     if DO_LOG:
         print(eu_routes)
+        # print(eu_airports)
 # There is single flight that has one stop-over.
 # There is no info as to which airport is the stop-over.
 # Remove it to keep data clean.
@@ -115,6 +117,7 @@ def main():
     eu_routes = swap_columns(eu_routes, "destination_airport", "source_airport")
     eu_routes.columns = NEW_COLUMNS
     if DO_LOG:
+        # print(eu_routes)
         print("Calculating flight distances.")
     calc_distances(eu_routes, eu_airports)
     eu_routes.to_csv(FLIGHTS_CSV_PATH)

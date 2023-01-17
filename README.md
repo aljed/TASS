@@ -7,8 +7,9 @@ Ręcznie wykonać skrypty w kolejności:
 1. `scripts/extract_bad_names.py`
 2. Ręczne poprawki nazw lotnisk. Plik `corrected_df.csv` zawiera już poprawione nazwy i można przejść do następnego punktu.
 3. `scripts/merge_good_bad.py`
-4. `scripts/make_flights.py`
-5. `scripts/prep_airlines.py`
+4. `scripts/prep_airlines.py`
+5. `scripts/make_flights.py`
+6. 
 
 ## Przygotowanie danych
 
