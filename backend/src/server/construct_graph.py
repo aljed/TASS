@@ -12,6 +12,8 @@ def construct_graph(
         rating_weights: RatingWeights) -> nx.DiGraph:
     
     G = nx.DiGraph()
+    for airport_id in airport_opinion_data:
+        G.add_node(airport_id)
     for row in flights.itertuples():
         weight: float = calculate_weight(
             row.airline_id,
@@ -20,8 +22,6 @@ def construct_graph(
             airline_opinion_data,
             airport_opinion_data,
             rating_weights)
-        G.add_node(row.departure_airport_id)
-        G.add_node(row.destination_airport_id)
         if __should_add_current_edge(G, row.departure_airport_id, row.destination_airport_id, weight):
             G.add_edge(row.departure_airport_id, row.destination_airport_id, weight=weight, airline_id=row.airline_id)
     return G
