@@ -152,23 +152,17 @@ Działanie:
 3. Odrzuca rekordy bez opinii *overall_rating*.
 4. Jeśli po tych krokach jakiś rekord nadal ma brakujące wpisy, to uzupełnia je wartością *overall_rating*.
 
-
-
-Wejście:
- - `
-
-Wyjście:
- - `
-
-Działanie:
-1. 
-
+### `merge_airport_reviews_with_ids.py`
 
 Wejście:
- - `
+ - `aggregated_airport_reviews.csv`
+ - `eu_airport_iata.csv`
 
 Wyjście:
- - `
+ - `airports.csv`
+
+Opinie o lotniskach są przyporzadkowane do lotniska po nazwie. By dodać do tych danych identyfikatory IATA należy połaczyć je ze spisem inedtyfikatorów według nazw lotniska. Problemem jest brak spójności w pisowni nazw tego samego lotniska w różnych źródłach danych. Skrypt automatycznie łączy niektóre opinie z kodami IATA. Pozostałe muszą być poprawione ręcznie.
 
 Działanie:
-1. 
+1. Upraszcza nazwy lotnisk poprzez usunięcie interpunkcji i wielkich liter w obu tabelach wejściowych.
+2. Ujednolica nazwy kolumn.
