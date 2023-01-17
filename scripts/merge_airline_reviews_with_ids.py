@@ -34,6 +34,7 @@ if __name__ == "__main__":
     aggregated_airline_reviews = aggregated_airline_reviews.drop_duplicates(subset="cleaned_airline_name")
 
     merged_airline_reviews: pd.DataFrame = pd.merge(airline_ids, aggregated_airline_reviews, on="cleaned_airline_name")
+    print(merged_airline_reviews.columns)
     merged_airline_reviews = merged_airline_reviews.drop(["airline_name", "cleaned_airline_name"], axis=1)
     merged_airline_reviews = merged_airline_reviews.rename(columns={"iata": "id"})
     merged_airline_reviews = swap_columns(merged_airline_reviews, "id", "name")
