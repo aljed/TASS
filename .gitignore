@@ -1,4 +1,6 @@
 /frontend/node_modules/
+/data/bad_names_df.csv
+/data/good_names_df.csv
 /data/eu_airlines_iata.csv
 /data/eu_airports_df.csv
 /data/eu_country_iso.csv

@@ -8,7 +8,11 @@ W celu przygotowania danych, przed uruchomieniem wyszukiwarki należy ręcznie w
 2. `scripts/merge_good_bad.py`
 3. `scripts/prep_airlines.py`
 4. `scripts/make_flights.py`
-5. 
+5. `scrips/aggregate_airline_reviews.py`
+6. `scrips/merge_airline_reviews_with_ids`
+7. `scrips/aggregate_airport_reviews.py`
+8. `scrips/merge_airport_reviews_with_ids.py`
+9. `scrips/clean_filghts.py`
 
 ## Przygotowanie danych
 
@@ -79,17 +83,59 @@ Działanie:
 
 1. Przygotowuje tabelę europejskich krajów wraz ich kodami ISO.
 2. Przygotowuje tabelę europejskich linii lotniczych wraz z ich kodami IATA.
-3. 
 
 ### `make_flights.py`
 
-Tworzy tabelę lotów w Europie z danych w `routes.dat` i `eu_airports_df.csv`. Oblicza dystans w kilometrach.
+Wejście:
+ - `routes.dat`
+ - `eu_airports_df.csv`
+
+Wyjście:
+ - `eu_flights.csv`
+
+Działanie:
+1. Tworzy tabelę lotów pomiędzy dwoma europejskimi lotniskami.
+2. Oblicza dystans w kilometrach.
+
 **TO DO:** Usunąć loty pomiędzy rosyjskimi lotniskami na terenie Azji -- Rosja jest oznaczona jako Europa.
-Kolumny:
- - departure_airport_id
- - destination_airport_id
- - airline_id
- - distance
+
+### `aggregate_airline_reviews.py`
+
+Wejście:
+ - `airline_reviews.csv`
+
+Wyjście:
+ - `aggregated_airline_reviews.csv`
+
+Działanie:
+1. Z tabeli opinii o liniach lotniczych wybiera kolumny opinii:
+   -  overall_rating
+   -  seat_comfort_rating
+   -  cabin_staff_rating
+   -  food_beverages_rating
+   -  inflight_entertainment_rating
+   -  value_money_rating
+2. W grupie opinii dla konkretnego lotniska brakujące wpisy uzupełnia średnią istniejących w tej samej kategorii dla tego lotniska -- oprócz kolumny *overall_rating*.
+3. 
 
 
 
+
+
+Wejście:
+ - `
+
+Wyjście:
+ - `
+
+Działanie:
+1. 
+
+Wejście:
+ - `
+
+Wyjście:
+ - `
+
+Działanie:
+1. 
