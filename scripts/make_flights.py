@@ -17,11 +17,12 @@ from math import acos, sin, cos, radians, floor
 import pandas as pd
 
 
-FLIGHTS_CSV_PATH    = "../data/eu_flights.csv"
-ROUTES_PATH         = "../data/routes.dat"
-ROUTES_COLUMNS      = ["airline", "source_airport", "destination_airport", "stops"]
-NEW_COLUMNS         = ["departure_airport_id", "destination_airport_id", "airline_id", "distance"]
-EU_AIRPORTS_PATH    = "../data/eu_airports_df.csv"
+FLIGHTS_CSV_PATH        = "../data/eu_flights.csv"
+ROUTES_PATH             = "../data/routes.dat"
+GLOBAL_ROUTES_COLUMNS   = ["airline", "airline_id", "source_airport", "source_airport_id", "destination_airport", "destination_airport_id", "codeshare", "stops", "equipment"]
+ROUTES_COLUMNS          = ["airline", "source_airport", "destination_airport", "stops"]
+NEW_COLUMNS             = ["departure_airport_id", "destination_airport_id", "airline_id", "distance"]
+EU_AIRPORTS_PATH        = "../data/eu_airports_df.csv"
 
 DO_LOG = True
 
@@ -29,7 +30,7 @@ DO_LOG = True
 def load_routes(path: str) -> pd.DataFrame:
     if DO_LOG:
         print("Reading global route data from: " + path)
-    df = pd.read_csv(ROUTES_PATH)[ROUTES_COLUMNS]
+    df = pd.read_csv(ROUTES_PATH, names=GLOBAL_ROUTES_COLUMNS)[ROUTES_COLUMNS]
     n = len(df)
     if DO_LOG:
         print(df)
@@ -46,6 +47,11 @@ def load_routes(path: str) -> pd.DataFrame:
 
 
 def get_eu_routes(global_routes: pd.DataFrame, eu_ap: pd.DataFrame) -> pd.DataFrame:
+#
+# TODO:
+# remove routes within russian asian teritory
+# because country of Russia is marked as european
+#
     eu_ap_list = eu_ap["iata_code"].unique().tolist()
     eu_routes = global_routes[global_routes["source_airport"].isin(eu_ap_list) & global_routes["destination_airport"].isin(eu_ap_list)]
     if DO_LOG:
@@ -67,7 +73,7 @@ def calc_distances(routes, airports: pd.DataFrame):
     R = 6371
     n = len(routes)
     for i in range(len(routes)):
-        if DO_LOG & (i%100 == 0):
+        if DO_LOG & (i%1000 == 0):
             print(f"{i} of {n}")
         dep_coords = airports[airports["iata_code"] == routes.loc[i, "departure_airport_id"]]["coordinates"]
         dep_coords_str = dep_coords.to_list()[0]
@@ -97,7 +103,6 @@ def main():
     n = len(eu_routes)
     if DO_LOG:
         print(eu_routes)
-        print(eu_airports)
 # There is single flight that has one stop-over.
 # There is no info as to which airport is the stop-over.
 # Remove it to keep data clean.
@@ -110,7 +115,6 @@ def main():
     eu_routes = swap_columns(eu_routes, "destination_airport", "source_airport")
     eu_routes.columns = NEW_COLUMNS
     if DO_LOG:
-        print(eu_routes)
         print("Calculating flight distances.")
     calc_distances(eu_routes, eu_airports)
     eu_routes.to_csv(FLIGHTS_CSV_PATH)

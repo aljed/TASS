@@ -2,8 +2,10 @@
 
 ## Kolejność postępowania
 
+Ręcznie wykonać skrypty w kolejności:
+
 1. `scripts/extract_bad_names.py`
-2. Ręczne poprawki nazw lkotnisk, lub skopiopwać z `corrected_df.csv`
+2. Ręczne poprawki nazw lotnisk. Plik `corrected_df.csv` zawiera już poprawione nazwy i można przejść do następnego punktu.
 3. `scripts/merge_good_bad.py`
 4. `scripts/make_flights.py`
 5. `scripts/prep_airlines.py`
@@ -39,6 +41,12 @@ Plik `data/corrected.csv` zawiera poprawione nazwy.
 ### `scripts/make_flights.py`
 
 Tworzy tabelę lotów w Europie z danych w `routes.dat` i `eu_airports_df.csv`. Oblicza dystans w kilometrach.
-**TO DO:** poprawić airline_id na wygodną dla człowieka.
+**TO DO:** Usunąć loty pomiędzy rosyjskimi lotniskami na terenie Azji -- Rosja jest oznaczona jako Europa.
 Kolumny:
+ - departure_airport_id
+ - destination_airport_id
+ - airline_id
+ - distance
+
+
 
