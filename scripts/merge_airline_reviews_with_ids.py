@@ -1,10 +1,15 @@
+#! /usr/bin/env python3
+
 from pathlib import Path
 
 import pandas as pd
 
-AGGREGATED_AIRLINE_REVIEWS_DATA_PATH: Path = Path("data/aggregated_airline_reviews.csv")
-AIRLINE_IDS_DATA_PATH: Path = Path("data/eu_airlines_iata.csv")
-MERGED_AIRLINE_REVIEWS_SAVE_PATH: Path = Path("final_data/airlines.csv")
+AGGREGATED_AIRLINE_REVIEWS_DATA_PATH: Path = Path("../data/aggregated_airline_reviews.csv")
+AIRLINE_IDS_DATA_PATH: Path = Path("../data/eu_airlines_iata.csv")
+MERGED_AIRLINE_REVIEWS_SAVE_PATH: Path = Path("../final_data/airlines.csv")
+# AGGREGATED_AIRLINE_REVIEWS_DATA_PATH: Path = Path("data/aggregated_airline_reviews.csv")
+# AIRLINE_IDS_DATA_PATH: Path = Path("data/eu_airlines_iata.csv")
+# MERGED_AIRLINE_REVIEWS_SAVE_PATH: Path = Path("final_data/airlines.csv")
 
 def clean_string(string: str) -> str:
     return (''.join(c for c in string if c.isalnum())).lower()

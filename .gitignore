@@ -4,4 +4,6 @@
 /data/eu_country_iso.csv
 /data/eu_flights.csv
 /data/eu_flights.csv
+/data/aggregated_airline_reviews.csv
 /data/aggregated_airport_reviews.csv
+/final_data/
