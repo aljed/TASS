@@ -39,9 +39,10 @@ if __name__ == "__main__":
     aggregated_airport_reviews = aggregated_airport_reviews.drop_duplicates(subset="cleaned_airport_name")
 
     merged_airport_reviews: pd.DataFrame = pd.merge(airport_ids, aggregated_airport_reviews, on="cleaned_airport_name")
-    # print(merged_airport_reviews.columns)
-# FIXME:
-    merged_airport_reviews = merged_airport_reviews.drop(["name", "cleaned_airport_name"], axis=1)
-    merged_airport_reviews = merged_airport_reviews.rename(columns={"iata_code": "id"})
+
+    merged_airport_reviews["name_x"] =merged_airport_reviews["name_x"].values
+    merged_airport_reviews = merged_airport_reviews.drop(["name_y", "cleaned_airport_name",
+                                                          "ident", "type", "iso_country", "coordinates"], axis=1)
+    merged_airport_reviews = merged_airport_reviews.rename(columns={"iata_code": "id", "name_x": "name"})
     merged_airport_reviews = swap_columns(merged_airport_reviews, "id", "name")
     merged_airport_reviews.to_csv(MERGED_AIRPORT_REVIEWS_SAVE_PATH, index=False)
