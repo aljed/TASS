@@ -27,13 +27,14 @@ DO_LOG = True
 def make_airlines_iata(eu_countries_list):
     airlines_df = pd.read_csv(AIRLINES_DAT_PATH, \
         names=["airline_id", "name", "alias", "iata", "icao", "callsign", "country", "active"], \
-        na_values=["\\N", "-"], keep_default_na=True )
+        na_values=["\\N", "-", "--", "??", ".."], keep_default_na=True )  # Te chyba mogą zostać: ЯП АЯ &T
     if DO_LOG:
         print(airlines_df)
     airlines_df = airlines_df[airlines_df["country"].isin(eu_countries_list)]
     airlines_df = airlines_df[COLUMNS].reset_index(drop=True)
     airlines_df.dropna(inplace=True)
-    # airlines_df = airlines_df[COLUMNS]
+    # print("These airline names have messed-up chars:")
+    # print(airlines_df[airlines_df.apply(lambda row : ~row["name"].isalnum(), axis=1)])
     return airlines_df
 
 
@@ -88,7 +89,7 @@ def main():
     airlines_iata_df.to_csv(EU_AIRLINES_IATA, index=None, columns=COLUMNS)
     if DO_LOG:
         print(airlines_iata_df)
-    airline_ids_to_names(airlines_iata_df)
+    # airline_ids_to_names(airlines_iata_df)
 
 
 if __name__ == "__main__":
