@@ -115,10 +115,42 @@ Działanie:
    -  food_beverages_rating
    -  inflight_entertainment_rating
    -  value_money_rating
+2. W grupie opinii dla konkretnej linii lotniczej brakujące wpisy uzupełnia średnią istniejących w tej samej kategorii dla tej linii -- oprócz kolumny *overall_rating*.
+3. Odrzuca rekordy bez opinii *overall_rating*.
+4. Jeśli po tych krokach jakiś rekord nadal ma brakujące wpisy, to uzupełnia je wartością *overall_rating*.
+
+### `merge_airline_reviews_with_ids.py`
+
+Wejście:
+ - `aggregated_airline_reviews.csv`
+ - `eu_airlines_iata.csv`
+
+Wyjście:
+ - `airlines.csv`
+
+Opinie o liniach lotniczych są przyporzadkowane do linii po nazwie. By dodać do tych danych identyfikatory IATA należy połaczyć je ze spisem inedtyfikatorów według nazw linii lotniczych. Problemem jest brak spójności w pisowni nazw tej samej linii w różnych źródłach danych. Skrypt automatycznie łączy niektóre opinie z kodami IATA. Pozostałe muszą być poprawione ręcznie.
+
+Działanie:
+1. Upraszcza nazwy linii lotniczych poprzez usunięcie interpunkcji i wielkich liter w obu tabelach wejściowych.
+2. Ujednolica nazwy kolumn.
+
+### `aggregate_airport_reviews.py`
+
+Wejście:
+ - `airport_reviews.csv`
+
+Wyjście:
+ - `aggregated_airport_reviews.csv`
+
+Działanie:
+1. Z tabeli opinii o lotniskach wybiera kolumny opinii:
+   -  overall_rating
+   -  queuing_rating
+   -  terminal_cleanliness_rating
+   -  airport_shopping_rating
 2. W grupie opinii dla konkretnego lotniska brakujące wpisy uzupełnia średnią istniejących w tej samej kategorii dla tego lotniska -- oprócz kolumny *overall_rating*.
-3. 
-
-
+3. Odrzuca rekordy bez opinii *overall_rating*.
+4. Jeśli po tych krokach jakiś rekord nadal ma brakujące wpisy, to uzupełnia je wartością *overall_rating*.
 
 
 
@@ -130,6 +162,7 @@ Wyjście:
 
 Działanie:
 1. 
+
 
 Wejście:
  - `
