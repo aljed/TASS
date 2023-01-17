@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
     merged_airport_reviews: pd.DataFrame = pd.merge(airport_ids, aggregated_airport_reviews, on="cleaned_airport_name")
 
-    merged_airport_reviews["name_x"] =merged_airport_reviews["name_x"].values
+    merged_airport_reviews["name_x"] = ["name_x"].values
     merged_airport_reviews = merged_airport_reviews.drop(["name_y", "cleaned_airport_name",
                                                           "ident", "type", "iso_country", "coordinates"], axis=1)
     merged_airport_reviews = merged_airport_reviews.rename(columns={"iata_code": "id", "name_x": "name"})
